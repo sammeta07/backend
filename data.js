@@ -1,4 +1,4 @@
-const samitiGroups = [
+const data = [
     {
       id: 1,
       group_id: 'ANM_1',
@@ -191,4 +191,4 @@ const samitiGroups = [
     }
   ];
 
-module.exports = samitiGroups;
+module.exports = data;
