@@ -1,21 +1,34 @@
 require('dotenv').config();
 const fastify = require('fastify')({ logger: true });
 
-// 1. CORS Register (Frontend se connect karne ke liye)
-fastify.register(require('@fastify/cors'), { 
-  origin: "*" 
+// 1. CORS Register
+fastify.register(require('@fastify/cors'), {
+  origin: process.env.ALLOWED_ORIGIN || 'http://localhost:5173'
 });
 
-// 2. MySQL Connection
+// 2. Cookie support
+fastify.register(require('@fastify/cookie'));
+
+// 3. JWT
+fastify.register(require('@fastify/jwt'), {
+  secret: process.env.JWT_SECRET
+});
+
+// 4. MySQL Connection (Aiven requires SSL)
 fastify.register(require('@fastify/mysql'), {
-  connectionString: process.env.MYSQL_URL,
+  host: process.env.MYSQL_HOST,
+  port: Number(process.env.MYSQL_PORT),
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  ssl: { rejectUnauthorized: false },
   promise: true
 });
 
-// 3. Register Routes
+// 5. Register Routes
 fastify.register(require('./routes/groups'));
 
-// 6. Start Server
+// Start Server
 const start = async () => {
   try {
     const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
