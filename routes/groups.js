@@ -1,4 +1,6 @@
 async function groupRoutes(fastify, options) {
+  const bcrypt = require('bcrypt');
+  const SALT_ROUNDS = 12;
 
   // GET /groups — fetch all groups with their events
   fastify.get('/groups', async (request, reply) => {
@@ -29,6 +31,65 @@ async function groupRoutes(fastify, options) {
     }));
 
     return { message: 'Groups fetched successfully', status: 200, data };
+  });
+
+  // POST /groups — create a new group
+  // POST /groups — create a new group
+  fastify.post('/groups', async (request, reply) => {
+    console.log('Received POST /groups with body:', request.body);
+    const { name, since, description, area, districtId, stateId, locationCords, groupContactNumbers, admins } = request.body;
+
+    if (!name || !since || !description || !area || !districtId || !stateId) {
+      return reply.code(400).send({ message: 'Missing required fields: name, since, description, area, districtId, stateId', status: 400 });
+    }
+
+    // Auto-generate group_id from name initials + timestamp
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase();
+    const group_id = `${initials}_${Date.now()}`;
+
+    // Hash each admin's password before storing
+    const hashedAdmins = await Promise.all(
+      (admins || []).map(async (admin) => ({
+        email: admin.email,
+        contactNumber: admin.contactNumber,
+        password: await bcrypt.hash(admin.password, SALT_ROUNDS)
+      }))
+    );
+
+    const [result] = await fastify.mysql.query(
+      'INSERT INTO groups (group_id, name, since, description, area, district_id, state_id, location_cords, contact_numbers, admins) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [
+        group_id,
+        name,
+        since,
+        description,
+        area,
+        districtId,
+        stateId,
+        JSON.stringify(locationCords || {}),
+        JSON.stringify(groupContactNumbers || []),
+        JSON.stringify(hashedAdmins)
+      ]
+    );
+
+    return reply.code(201).send({
+      message: 'Group created successfully',
+      status: 201,
+      data: {
+        id: result.insertId,
+        group_id,
+        name,
+        since,
+        description,
+        area,
+        districtId,
+        stateId,
+        locationCords: locationCords || {},
+        groupContactNumbers: groupContactNumbers || [],
+        admins: hashedAdmins.map(a => ({ email: a.email, contactNumber: a.contactNumber })), // never return passwords
+        events: []
+      }
+    });
   });
 
   // GET /groups/:id — fetch a single group with its events
