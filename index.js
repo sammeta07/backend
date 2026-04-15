@@ -40,6 +40,8 @@ fastify.register(require('@fastify/mysql'), {
 
 // 5. Register Routes
 fastify.register(require('./routes/groups'));
+fastify.register(require('./routes/register'));
+fastify.register(require('./routes/login'));
 
 // Start Server
 const start = async () => {
