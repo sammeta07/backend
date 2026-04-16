@@ -4,7 +4,7 @@ async function groupRoutes(fastify, options) {
 
   // GET /groups — fetch all groups with their events
   fastify.get('/groups', async (request, reply) => {
-    const [groups] = await fastify.mysql.query('SELECT * FROM groups ORDER BY id');
+    const [groups] = await fastify.mysql.query('SELECT * FROM `groups` ORDER BY id');
 
     if (groups.length === 0) {
       return { message: 'Groups fetched successfully', status: 200, data: [] };
@@ -34,18 +34,13 @@ async function groupRoutes(fastify, options) {
   });
 
   // POST /groups — create a new group
-  // POST /groups — create a new group
   fastify.post('/groups', async (request, reply) => {
-    console.log('Received POST /groups with body:', request.body);
+    console.info('Received POST /groups with body:', request.body);
     const { name, since, description, area, districtId, stateId, locationCords, groupContactNumbers, admins } = request.body;
 
     if (!name || !since || !description || !area || !districtId || !stateId) {
       return reply.code(400).send({ message: 'Missing required fields: name, since, description, area, districtId, stateId', status: 400 });
     }
-
-    // Auto-generate group_id from name initials + timestamp
-    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase();
-    const group_id = `${initials}_${Date.now()}`;
 
     // Hash each admin's password before storing
     const hashedAdmins = await Promise.all(
@@ -56,10 +51,12 @@ async function groupRoutes(fastify, options) {
       }))
     );
 
+    // Insert with a temporary group_id, then update with initials + id
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase();
     const [result] = await fastify.mysql.query(
-      'INSERT INTO groups (group_id, name, since, description, area, district_id, state_id, location_cords, contact_numbers, admins) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO `groups` (group_id, name, since, description, area, district_id, state_id, location_cords, contact_numbers, admins) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
-        group_id,
+        `${initials}_temp`,
         name,
         since,
         description,
@@ -71,6 +68,9 @@ async function groupRoutes(fastify, options) {
         JSON.stringify(hashedAdmins)
       ]
     );
+
+    const group_id = `${initials}_${result.insertId}`;
+    await fastify.mysql.query('UPDATE `groups` SET group_id = ? WHERE id = ?', [group_id, result.insertId]);
 
     return reply.code(201).send({
       message: 'Group created successfully',
@@ -96,7 +96,7 @@ async function groupRoutes(fastify, options) {
   fastify.get('/groups/:id', async (request, reply) => {
     const { id } = request.params;
 
-    const [rows] = await fastify.mysql.query('SELECT * FROM groups WHERE id = ?', [id]);
+    const [rows] = await fastify.mysql.query('SELECT * FROM `groups` WHERE id = ?', [id]);
     if (rows.length === 0) {
       return reply.code(404).send({ message: 'Group not found', status: 404 });
     }
