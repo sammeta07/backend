@@ -4,10 +4,10 @@ async function registerRoutes(fastify, options) {
 
   // POST /register — register a new user
   fastify.post('/register', async (request, reply) => {
-    const { email, mobile, name, password, type } = request.body;
+    const { email, mobile, name, password } = request.body;
 
-    if (!email || !mobile || !name || !password || !type) {
-      return reply.code(400).send({ message: 'Missing required fields: email, mobile, name, password, type', status: 400 });
+    if (!email || !mobile || !name || !password) {
+      return reply.code(400).send({ message: 'Missing required fields: email, mobile, name, password', status: 400 });
     }
 
     // Check if user already exists
@@ -19,8 +19,8 @@ async function registerRoutes(fastify, options) {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const [result] = await fastify.mysql.query(
-      'INSERT INTO users (email, mobile, name, password, type) VALUES (?, ?, ?, ?, ?)',
-      [email, mobile, name, hashedPassword, type]
+      'INSERT INTO users (email, mobile, name, password) VALUES (?, ?, ?, ?)',
+      [email, mobile, name, hashedPassword]
     );
 
     return reply.code(201).send({
@@ -31,7 +31,8 @@ async function registerRoutes(fastify, options) {
         email,
         mobile,
         name,
-        type
+        groupRoles: [],
+        eventRoles: []
       }
     });
   });

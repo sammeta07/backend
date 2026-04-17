@@ -1,194 +1,355 @@
-const data = [
+  samitiGroups: GroupDetailsModel[] = [
     {
-      id: 1,
-      group_id: 'ANM_1',
-      name: 'Azad Navyuvak Mandal',
-      location: 'Raipur, CG',
-      since: 2018,
-      description: 'Azad Navyuvak Mandal is a vibrant youth organization based in Raipur, Chhattisgarh. Founded in 2018, the group has quickly become a hub for young people passionate about community service, cultural activities, and social change. With a focus on empowering youth and fostering a sense of unity, Azad Navyuvak Mandal organizes a wide range of events throughout the year, including festivals, charity drives, educational workshops, and sports tournaments. The group is known for its inclusive and energetic approach, attracting members from diverse backgrounds who share a common goal of making a positive impact in their community.',
-      contact_numbers: ['9876543210', '9123456780'],
-      admins: [],
-      events: [
-        { id: 101, title: 'Ganesh Utsav 2026', year_count: 5, start_date: '2026-02-01', end_date: '2026-02-11', location: 'Raipur Main Ground', description: 'Celebrate the vibrant festival of Ganesh Utsav with us! Join us for 10 days of cultural performances, community feasts, and spiritual activities as we honor Lord Ganesha. The event will feature traditional music and dance, delicious food stalls, and a grand procession on the final day. Don\'t miss this opportunity to experience the rich cultural heritage of Raipur and connect with fellow community members in a joyous celebration!', images: ['https://loremflickr.com/600/400?lock=1', 'https://loremflickr.com/600/400?lock=2', 'https://loremflickr.com/600/400?lock=3', 'https://loremflickr.com/600/400?lock=4'] },
-        { id: 102, title: 'Blood Donation Camp', year_count: 2, start_date: '2026-03-10', end_date: '2026-03-15', location: 'City Hospital', description: 'Save lives by donating blood! Our community blood donation camp provides a safe and hygienic environment for blood donors. Every donation can save up to three lives. Medical professionals will conduct health checks, and all donors will receive refreshments and certificates of appreciation. Join us in this noble cause!', images: ['https://loremflickr.com/600/400?lock=5', 'https://loremflickr.com/600/400?lock=6', 'https://loremflickr.com/600/400?lock=7'] },
-        { id: 103, title: 'Cricket League', year_count: 10, start_date: '2026-11-01', end_date: '2026-11-12', location: 'Sports Stadium', description: 'Experience thrilling cricket action in our annual league tournament! Teams from across the city will compete in this exciting 12-day event featuring matches, skill demonstrations, and awards for outstanding performances. Whether you\'re a player or a spectator, this is the ultimate cricket celebration!', images: ['https://loremflickr.com/600/400?lock=8', 'https://loremflickr.com/600/400?lock=9', 'https://loremflickr.com/600/400?lock=10', 'https://loremflickr.com/600/400?lock=11'] }
+      "id": 1,
+      "groupId": "ANM_1",
+      "title": "Azad Navyuvak Mandal",
+      "locationCords": { "lat": 21.2310, "long": 81.4508 },  // ~150m from user
+      "area": "Kumhari",
+      "since": 2018,
+      "description": "Azad Navyuvak Mandal is a vibrant youth organization based in Raipur, Chhattisgarh. Founded in 2018, the group has quickly become a hub for young people passionate about community service, cultural activities, and social change. With a focus on empowering youth and fostering a sense of unity, Azad Navyuvak Mandal organizes a wide range of events throughout the year, including festivals, charity drives, educational workshops, and sports tournaments. The group is known for its inclusive and energetic approach, attracting members from diverse backgrounds who share a common goal of making a positive impact in their community.",
+      "contactNumbers": ["9876543210", "9123456780"],
+      "logo": "https://picsum.photos/seed/anm-logo/200/200",
+      "favourite": true,
+      "admins": [],
+      "events": [
+        {
+          "id": 101,
+          "title": "Ganesh Utsav 2026",
+          "type" : EventType.SPORTS,
+          "year_count": 5,
+          "start_date": "2026-03-19",
+          "end_date": "2026-12-31",
+          "locationCords": { "lat": 21.2312, "long": 81.4510 },  // ~180m from group
+          "photos": [
+            "https://picsum.photos/seed/ganesh-utsav/800/500",
+            "https://picsum.photos/seed/ganesh-utsav-2/800/500"
+          ],
+          "programs": [
+            { "id": 101001, 'description' : "Start the day with divine blessings as devotees gather at dawn for the sacred Prabhat Aarati, filling the air with hymns and incense.", "title": "Prabhat Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-04-10", "from_time": "07:00", "to_time": "21:00", "photos": ["https://picsum.photos/seed/program-101001-1/800/500", "https://picsum.photos/seed/program-101001-2/800/500"], "locationCords": { "lat": 21.2312, "long": 81.4510 } },
+            { "id": 101002, 'description' : "Witness the sacred installation ceremony of Lord Ganesha's idol, accompanied by Vedic chants and a purifying hawan ritual.", "title": "Sthapana Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-03-19", "from_time": "07:00", "to_time": "21:30", "photos": ["https://picsum.photos/seed/program-101002-1/800/500", "https://picsum.photos/seed/program-101002-2/800/500"], "locationCords": { "lat": 21.2313, "long": 81.4511 } },
+            { "id": 101003, 'description' : "An engaging session for children to learn about values, culture, and the teachings of Lord Ganesha through stories and activities.", "title": "Bal Sanskar Sabha", "type": ProgramType.BHANDARA, "date": "2026-03-19", "from_time": "07:00", "to_time": "21:00", "photos": ["https://picsum.photos/seed/program-101003-1/800/500", "https://picsum.photos/seed/program-101003-2/800/500"], "locationCords": { "lat": 21.2311, "long": 81.4509 } },
+            { "id": 101004, 'description' : "Women from the community come together for a soul-stirring evening of devotional bhajans and kirtan in honor of Lord Ganesha.", "title": "Mahila Bhajan Sandhya", "type": ProgramType.CULTURAL, "date": "2026-03-19", "from_time": "07:30", "to_time": "21:00", "photos": ["https://picsum.photos/seed/program-101004-1/800/500", "https://picsum.photos/seed/program-101004-2/800/500"], "locationCords": { "lat": 21.2312, "long": 81.4511 } },
+            { "id": 101005, 'description' : "A grand community feast distributing blessed prasad to all devotees, symbolizing unity and divine grace of Lord Ganesha.", "title": "Mahaprasad Vitran", "type": ProgramType.BHANDARA, "date": "2026-02-09", "from_time": "07:23", "to_time": "21:30", "photos": ["https://picsum.photos/seed/program-101005-1/800/500", "https://picsum.photos/seed/program-101005-2/800/500"], "locationCords": { "lat": 21.2313, "long": 81.4510 } },
+            { "id": 101006, 'description' : "The grand procession for the immersion of Lord Ganesha's idol, featuring music, dance, and heartfelt farewells from the entire community.", "title": "Ganesh Visarjan Yatra", "type": ProgramType.SPIRITUAL, "date": "2026-02-24", "from_time": "21:30", "to_time": "20:30", "photos": ["https://picsum.photos/seed/program-101006-1/800/500", "https://picsum.photos/seed/program-101006-2/800/500"], "locationCords": { "lat": 21.2311, "long": 81.4510 } }
+          ],
+          "description": "Celebrate the vibrant festival of Ganesh Utsav with us! Join us for 10 days of cultural performances, community feasts, and spiritual activities as we honor Lord Ganesha. The event will feature traditional music and dance, delicious food stalls, and a grand procession on the final day. Don't miss this opportunity to experience the rich cultural heritage of Raipur and connect with fellow community members in a joyous celebration!"
+        },
+        {
+          "id": 102,
+          "title": "Blood Donation Camp",
+          "type" : EventType.OTHER,
+          "year_count": 2,
+          "start_date": "2026-03-12",
+          "end_date": "2026-03-14",
+          "locationCords": { "lat": 21.2308, "long": 81.4506 },  // ~120m from group
+          "photos": [
+            "https://picsum.photos/seed/blood-donation/800/500",
+            "https://picsum.photos/seed/blood-donation-2/800/500"
+          ],
+          "programs": [
+            { "id": 102001, 'description' : "The camp begins with a short prayer ceremony to seek blessings for the health of all donors and recipients of donated blood.", "title": "Shubh Aarambh Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-03-13", "from_time": "08:00", "to_time": "08:30", "photos": ["https://picsum.photos/seed/program-102001-1/800/500", "https://picsum.photos/seed/program-102001-2/800/500"], "locationCords": { "lat": 21.2308, "long": 81.4506 } },
+            { "id": 102002, 'description' : "A continuous health desk staffed by medical professionals providing consultations, blood pressure checks, and health tips throughout the day.", "title": "Health Desk", "type": ProgramType.BHANDARA, "date": "2026-03-14", "from_time": "00:00", "to_time": "23:59", "photos": ["https://picsum.photos/seed/program-102002-1/800/500", "https://picsum.photos/seed/program-102002-2/800/500"], "locationCords": { "lat": 21.2309, "long": 81.4507 } },
+            { "id": 102003, 'description' : "A nutritious meal provided to all blood donors as post-donation care, prepared lovingly by community volunteers to aid recovery.", "title": "Seva Bhandara", "type": ProgramType.BHANDARA, "date": "2026-03-16", "from_time": "12:00", "to_time": "14:00", "photos": ["https://picsum.photos/seed/program-102003-1/800/500", "https://picsum.photos/seed/program-102003-2/800/500"], "locationCords": { "lat": 21.2307, "long": 81.4505 } },
+            { "id": 102004, 'description' : "An evening prayer to thank the divine for inspiring so many community members to donate blood and save precious lives.", "title": "Evening Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-03-13", "from_time": "18:00", "to_time": "18:45", "photos": ["https://picsum.photos/seed/program-102004-1/800/500", "https://picsum.photos/seed/program-102004-2/800/500"], "locationCords": { "lat": 21.2308, "long": 81.4507 } },
+            { "id": 102005, 'description' : "The closing ceremony of the camp with a hawan to bless all donors and pray for the speedy recovery of those in need.", "title": "Samapan Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-03-14", "from_time": "16:00", "to_time": "17:30", "photos": ["https://picsum.photos/seed/program-102005-1/800/500", "https://picsum.photos/seed/program-102005-2/800/500"], "locationCords": { "lat": 21.2309, "long": 81.4506 } }
+          ],
+          "description": "Save lives by donating blood! Our community blood donation camp provides a safe and hygienic environment for blood donors. Every donation can save up to three lives. Medical professionals will conduct health checks, and all donors will receive refreshments and certificates of appreciation. Join us in this noble cause!"
+        },
+        {
+          "id": 103,
+          "title": "Cricket League",
+          "type" : EventType.SPORTS,
+          "year_count": 10,
+          "start_date": "2026-02-01",
+          "end_date": "2026-02-12",
+          "locationCords": { "lat": 21.2311, "long": 81.4512 },  // ~150m from group
+          "photos": [
+            "https://picsum.photos/seed/cricket-league/800/500",
+            "https://picsum.photos/seed/cricket-league-2/800/500"
+          ],
+          "programs": [
+            { "id": 103001, 'description' : "The cricket league kicks off with an exciting opening ceremony featuring team introductions, flag hoisting, and a march-past by all players.", "title": "Opening Ceremony", "type": ProgramType.SPIRITUAL, "date": "2026-02-01", "from_time": "09:00", "to_time": "10:00", "photos": ["https://picsum.photos/seed/program-103001-1/800/500", "https://picsum.photos/seed/program-103001-2/800/500"], "locationCords": { "lat": 21.2311, "long": 81.4512 } },
+            { "id": 103002, 'description' : "A sacred hawan where all team captains take a pledge of sportsmanship and fair play before the tournament officially begins.", "title": "Team Pledge Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-02-01", "from_time": "10:30", "to_time": "11:15", "photos": ["https://picsum.photos/seed/program-103002-1/800/500", "https://picsum.photos/seed/program-103002-2/800/500"], "locationCords": { "lat": 21.2312, "long": 81.4513 } },
+            { "id": 103003, 'description' : "A mid-tournament community feast for all players, coaches, and volunteers to recharge and build camaraderie during the league.", "title": "Players Bhandara", "type": ProgramType.BHANDARA, "date": "2026-02-06", "from_time": "14:00", "to_time": "15:30", "photos": ["https://picsum.photos/seed/program-103003-1/800/500", "https://picsum.photos/seed/program-103003-2/800/500"], "locationCords": { "lat": 21.2310, "long": 81.4511 } },
+            { "id": 103004, 'description' : "An exclusive meet-and-greet session where fans interact with their favorite players, followed by distribution of prasad and snacks.", "title": "Fan Meet Prasad", "type": ProgramType.BHANDARA, "date": "2026-02-10", "from_time": "17:00", "to_time": "18:00", "photos": ["https://picsum.photos/seed/program-103004-1/800/500", "https://picsum.photos/seed/program-103004-2/800/500"], "locationCords": { "lat": 21.2311, "long": 81.4513 } },
+            { "id": 103005, 'description' : "The grand finale featuring the championship match, trophy presentation, and a ceremonial visarjan to conclude the 12-day tournament.", "title": "Final Award Visarjan", "type": ProgramType.SPIRITUAL, "date": "2026-02-12", "from_time": "18:00", "to_time": "20:00", "photos": ["https://picsum.photos/seed/program-103005-1/800/500", "https://picsum.photos/seed/program-103005-2/800/500"], "locationCords": { "lat": 21.2312, "long": 81.4512 } }
+          ],
+          "description": "Experience thrilling cricket action in our annual league tournament! Teams from across the city will compete in this exciting 12-day event featuring matches, skill demonstrations, and awards for outstanding performances. Whether you're a player or a spectator, this is the ultimate cricket celebration!"
+        }
       ]
     },
     {
-      id: 2,
-      group_id: 'ESB_2',
-      name: 'Ekta Samiti Bhilai',
-      location: 'Bhilai, CG',
-      since: 2010,
-      description: 'Ekta Samiti Bhilai is a cultural and social organization dedicated to preserving local traditions and supporting community welfare.',
-      contact_numbers: ['9876123456', '9123456781'],
-      admins: [],
-      events: [
-        { id: 201, title: 'Durga Puja 2025', year_count: 51, start_date: '2026-01-10', end_date: '2026-01-20', location: 'Sector 6 Park', description: 'Join us for the most revered festival celebration! This 51-year-old tradition brings together thousands of devotees for cultural performances, traditional feasts, and spiritual ceremonies to honor Goddess Durga. Experience intricate decorations, elaborate pujas, and community bonding at its finest!', images: ['https://loremflickr.com/600/400?lock=12', 'https://loremflickr.com/600/400?lock=13', 'https://loremflickr.com/600/400?lock=14', 'https://loremflickr.com/600/400?lock=15'] },
-        { id: 202, title: 'Garba Night', year_count: 5, start_date: '2025-12-15', end_date: '2025-12-25', location: 'Community Hall', description: 'Dance into the festive season with our vibrant Garba Night! This traditional circular dance celebrates the joy of togetherness. Come dressed in colorful attire to participate in group dances, enjoy music, and connect with the community in a fun and energetic atmosphere!', images: ['https://loremflickr.com/600/400?lock=16', 'https://loremflickr.com/600/400?lock=17', 'https://loremflickr.com/600/400?lock=18'] },
-        { id: 203, title: 'Diwali Mela', year_count: 8, start_date: '2026-11-05', end_date: '2026-11-15', location: 'Civic Center', description: 'Experience the festival of lights like never before! Our Diwali Mela is a grand celebration featuring food stalls, cultural performances, fireworks, and shopping. Families and friends gather to celebrate prosperity, happiness, and the victory of good over evil.', images: ['https://loremflickr.com/600/400?lock=19', 'https://loremflickr.com/600/400?lock=20', 'https://loremflickr.com/600/400?lock=21', 'https://loremflickr.com/600/400?lock=22'] },
-        { id: 204, title: 'Winter Charity Drive', year_count: 12, start_date: '2026-01-28', end_date: '2026-02-08', location: 'Station Road', description: 'Spread warmth this winter! Our 12-year tradition of charity helps underprivileged families during the cold season. We collect and distribute blankets, warm clothes, and essentials. Your contribution can make a real difference in someone\'s life.', images: ['https://loremflickr.com/600/400?lock=23', 'https://loremflickr.com/600/400?lock=24', 'https://loremflickr.com/600/400?lock=25'] }
+      "id": 2,
+      "groupId": "ESB_2",
+      "title": "Ekta Samiti Bhilai",
+      "locationCords": { "lat": 21.2345, "long": 81.4520 },  // ~550m from user
+      "area": "Charoda",
+      "since": 2010,
+      "description": "Ekta Samiti Bhilai promotes community harmony and organizes cultural events that bring people together in celebration and solidarity.",
+      "contactNumbers": ["9876123456", "9123456781"],
+      "logo": "https://picsum.photos/seed/esb-logo/200/200",
+      "favourite": false,
+      "admins": [],
+      "events": [
+        {
+          "id": 201,
+          "title": "Durga Puja 2025",
+          "type" : EventType.PUJA,
+          "year_count": 51,
+          "start_date": "2026-03-12",
+          "end_date": "2026-03-15",
+          "locationCords": { "lat": 21.2347, "long": 81.4522 },  // ~160m from group
+          "photos": [
+            "https://picsum.photos/seed/durga-puja/800/500",
+            "https://picsum.photos/seed/durga-puja-2/800/500"
+          ],
+          "programs": [
+            { "id": 201001, 'description' : "The festival begins with the auspicious Kalash Sthapana ritual, invoking Goddess Durga's divine presence and seeking her blessings for all devotees.", "title": "Kalash Sthapana", "type": ProgramType.SPIRITUAL, "date": "2026-03-12", "from_time": "06:30", "to_time": "08:00", "photos": ["https://picsum.photos/seed/program-201001-1/800/500", "https://picsum.photos/seed/program-201001-2/800/500"], "locationCords": { "lat": 21.2347, "long": 81.4522 } },
+            { "id": 201002, 'description' : "Young girls are worshipped as manifestations of Goddess Durga in this deeply touching ceremony that celebrates feminine divinity.", "title": "Kumari Pujan", "type": ProgramType.SPIRITUAL, "date": "2026-03-12", "from_time": "10:00", "to_time": "11:30", "photos": ["https://picsum.photos/seed/program-201002-1/800/500", "https://picsum.photos/seed/program-201002-2/800/500"], "locationCords": { "lat": 21.2348, "long": 81.4523 } },
+            { "id": 201003, 'description' : "A grand community feast open to all, serving traditional festive food as a symbol of equality and divine generosity during Durga Puja.", "title": "Maha Bhandara", "type": ProgramType.BHANDARA, "date": "2026-03-16", "from_time": "11:00", "to_time": "19:00", "photos": ["https://picsum.photos/seed/program-201003-1/800/500", "https://picsum.photos/seed/program-201003-2/800/500"], "locationCords": { "lat": 21.2346, "long": 81.4521 } },
+            { "id": 201004, 'description' : "The mesmerizing evening aarati with lamps, bells, and devotional songs creates a deeply spiritual atmosphere for all devotees.", "title": "Sandhya Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-03-16", "from_time": "14:00", "to_time": "20:00", "photos": ["https://picsum.photos/seed/program-201004-1/800/500", "https://picsum.photos/seed/program-201004-2/800/500"], "locationCords": { "lat": 21.2347, "long": 81.4523 } },
+            { "id": 201005, 'description' : "The grand farewell procession for Goddess Durga, with thousands joining the colorful parade through the streets to the immersion site.", "title": "Visarjan Shobha Yatra", "type": ProgramType.CRICKET, "date": "2026-03-15", "from_time": "16:00", "to_time": "20:00", "photos": ["https://picsum.photos/seed/program-201005-1/800/500", "https://picsum.photos/seed/program-201005-2/800/500"], "locationCords": { "lat": 21.2348, "long": 81.4522 } }
+          ],
+          "description": "Join us for the most revered festival celebration! This 51-year-old tradition brings together thousands of devotees for cultural performances, traditional feasts, and spiritual ceremonies to honor Goddess Durga. Experience intricate decorations, elaborate pujas, and community bonding at its finest!"
+        },
+        {
+          "id": 202,
+          "title": "Garba Night",
+          "year_count": 5,
+          "type": EventType.PUJA,
+          "start_date": "2025-12-15",
+          "end_date": "2025-12-25",
+          "locationCords": { "lat": 21.2343, "long": 81.4518 },  // ~140m from group
+          "photos": [
+            "https://picsum.photos/seed/garba-night/800/500",
+            "https://picsum.photos/seed/garba-night-2/800/500"
+          ],
+          "programs": [
+            { "id": 202001, 'description' : "The Garba celebration begins with a divine aarati to invoke Goddess Amba's blessings before the colorful dance festivities commence.", "title": "Garba Opening Aarati", "type": ProgramType.SPIRITUAL, "date": "2025-12-15", "from_time": "18:30", "to_time": "19:00", "photos": ["https://picsum.photos/seed/program-202001-1/800/500", "https://picsum.photos/seed/program-202001-2/800/500"], "locationCords": { "lat": 21.2343, "long": 81.4518 } },
+            { "id": 202002, 'description' : "An interactive workshop for beginners to learn the art of Dandiya Raas, led by experienced dance instructors in a festive atmosphere.", "title": "Dandiya Workshop", "type": ProgramType.CULTURAL, "date": "2025-12-15", "from_time": "19:15", "to_time": "20:15", "photos": ["https://picsum.photos/seed/program-202002-1/800/500", "https://picsum.photos/seed/program-202002-2/800/500"], "locationCords": { "lat": 21.2344, "long": 81.4519 } },
+            { "id": 202003, 'description' : "Sweet prasad is distributed to all participants as a symbol of Goddess Amba's blessings during the joyful festive celebration.", "title": "Community Prasad Vitran", "type": ProgramType.BHANDARA, "date": "2025-12-20", "from_time": "21:00", "to_time": "22:00", "photos": ["https://picsum.photos/seed/program-202003-1/800/500", "https://picsum.photos/seed/program-202003-2/800/500"], "locationCords": { "lat": 21.2342, "long": 81.4517 } },
+            { "id": 202004, 'description' : "Young dancers take center stage in an energetic Garba round, showcasing their vibrant attire and gracefully synchronized movements.", "title": "Youth Garba Round", "type": ProgramType.CULTURAL, "date": "2025-12-22", "from_time": "20:00", "to_time": "21:30", "photos": ["https://picsum.photos/seed/program-202004-1/800/500", "https://picsum.photos/seed/program-202004-2/800/500"], "locationCords": { "lat": 21.2343, "long": 81.4519 } },
+            { "id": 202005, 'description' : "The festival concludes with a grand feast celebrating the spirit of togetherness and community bonding, sending everyone home with a full heart.", "title": "Grand Finale Bhandara", "type": ProgramType.BHANDARA, "date": "2025-12-25", "from_time": "20:30", "to_time": "22:30", "photos": ["https://picsum.photos/seed/program-202005-1/800/500", "https://picsum.photos/seed/program-202005-2/800/500"], "locationCords": { "lat": 21.2344, "long": 81.4518 } }
+          ],
+          "description": "Dance into the festive season with our vibrant Garba Night! This traditional circular dance celebrates the joy of togetherness. Come dressed in colorful attire to participate in group dances, enjoy music, and connect with the community in a fun and energetic atmosphere!"
+        }
       ]
     },
     {
-      id: 3,
-      group_id: 'SSSM_3',
-      name: 'Shiv Shakti Sewa Mandal',
-      location: 'Durg, CG',
-      since: 2005,
-      description: 'Shiv Shakti Sewa Mandal is a spiritual and social organization focused on community service and religious ceremonies.',
-      contact_numbers: ['9876234567', '9123456782'],
-      admins: [],
-      events: [
-        { id: 301, title: 'Maha Shivratri Bhandara', year_count: 15, start_date: '2026-01-30', end_date: '2026-02-10', location: 'Shiv Mandir', description: 'Celebrate the great night of Lord Shiva with traditional bhandara (community feast)! This 15-year-old event honors Shiva worship through prayers, meditation, and free meals for all devotees. Experience spiritual awakening and community solidarity.', images: ['https://loremflickr.com/600/400?lock=26', 'https://loremflickr.com/600/400?lock=27', 'https://loremflickr.com/600/400?lock=28', 'https://loremflickr.com/600/400?lock=29'] },
-        { id: 302, title: 'Yoga Workshop', year_count: 3, start_date: '2026-04-01', end_date: '2026-04-12', location: 'Yoga Center', description: 'Achieve wellness and inner peace through guided yoga sessions! Our expert instructors will teach you traditional asanas, pranayama, and meditation techniques. Perfect for beginners and experienced practitioners alike.', images: ['https://loremflickr.com/600/400?lock=30', 'https://loremflickr.com/600/400?lock=31', 'https://loremflickr.com/600/400?lock=32'] },
-        { id: 303, title: 'Satsang Series', year_count: 7, start_date: '2026-01-20', end_date: '2026-02-04', location: 'Satsang Bhawan', description: 'Join our 7-year tradition of spiritual gatherings! Satsang brings together people for meaningful discussions, devotional singing, and spiritual teachings. A unique opportunity to explore inner consciousness and connect with like-minded seekers.', images: ['https://loremflickr.com/600/400?lock=33', 'https://loremflickr.com/600/400?lock=34', 'https://loremflickr.com/600/400?lock=35', 'https://loremflickr.com/600/400?lock=36'] },
-        { id: 304, title: 'Temple Renovation', year_count: 4, start_date: '2026-06-01', end_date: '2026-06-10', location: 'Old Temple', description: 'Be part of preserving our heritage! Help us restore and beautify the historic temple through community participation. Every contribution, big or small, helps preserve the cultural and spiritual significance of this sacred place.', images: ['https://loremflickr.com/600/400?lock=37', 'https://loremflickr.com/600/400?lock=38', 'https://loremflickr.com/600/400?lock=39'] },
-        { id: 305, title: 'Free Medical Checkup', year_count: 6, start_date: '2026-01-29', end_date: '2026-02-09', location: 'Health Clinic', description: 'Your health matters! Our free medical camp provides comprehensive health examinations, consultations, and basic treatments. Qualified doctors and healthcare professionals are available for everyone in the community.', images: ['https://loremflickr.com/600/400?lock=40', 'https://loremflickr.com/600/400?lock=41', 'https://loremflickr.com/600/400?lock=42', 'https://loremflickr.com/600/400?lock=43'] }
+      "id": 3,
+      "groupId": "NSM_3",
+      "title": "Navjivan Samaj Mandal",
+      "locationCords": { "lat": 21.2420, "long": 81.4580 },  // ~1.5km from user
+      "area": "Bhilai 3",
+      "since": 2015,
+      "description": "Navjivan Samaj Mandal works towards social welfare and youth empowerment through various educational and cultural programs.",
+      "contactNumbers": ["9876543211", "9123456782"],
+      "logo": "https://picsum.photos/seed/nsm-logo/200/200",
+      "favourite": true,
+      "admins": [],
+      "events": [
+        {
+          "id": 301,
+          "title": "Holi Celebration",
+          "year_count": 8,
+          "type" : EventType.FESTIVAL,
+          "start_date": "2026-03-20",
+          "end_date": "2026-03-21",
+          "locationCords": { "lat": 21.2422, "long": 81.4578 },  // ~180m from group
+          "photos": [
+            "https://picsum.photos/seed/holi/800/500",
+            "https://picsum.photos/seed/holi-2/800/500"
+          ],
+          "programs": [
+            { "id": 301001, 'description' : "The Holi celebration begins with a spiritual aarati and community prayers, setting a joyful and auspicious tone for the festival of colors.", "title": "Holi Milan Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-03-20", "from_time": "09:00", "to_time": "09:45", "photos": ["https://picsum.photos/seed/program-301001-1/800/500", "https://picsum.photos/seed/program-301001-2/800/500"], "locationCords": { "lat": 21.2422, "long": 81.4578 } },
+            { "id": 301002, 'description' : "A festive community meal featuring traditional Holi delicacies like gujiya, thandai, and puranpoli, shared with everyone in attendance.", "title": "Rangotsav Bhandara", "type": ProgramType.BHANDARA, "date": "2026-03-20", "from_time": "13:00", "to_time": "15:00", "photos": ["https://picsum.photos/seed/program-301002-1/800/500", "https://picsum.photos/seed/program-301002-2/800/500"], "locationCords": { "lat": 21.2423, "long": 81.4579 } },
+            { "id": 301003, 'description' : "Local artists perform traditional Chhattisgarhi folk dances, bringing the rich and vibrant cultural heritage of the region to life.", "title": "Folk Dance Program", "type": ProgramType.CULTURAL, "date": "2026-03-20", "from_time": "13:00", "to_time": "15:00", "photos": ["https://picsum.photos/seed/program-301003-1/800/500", "https://picsum.photos/seed/program-301003-2/800/500"], "locationCords": { "lat": 21.2421, "long": 81.4577 } },
+            { "id": 301004, 'description' : "A purifying hawan ceremony as the sun sets on Holi day, symbolizing the timeless victory of good over evil and light over darkness.", "title": "Evening Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-03-20", "from_time": "18:30", "to_time": "19:30", "photos": ["https://picsum.photos/seed/program-301004-1/800/500", "https://picsum.photos/seed/program-301004-2/800/500"], "locationCords": { "lat": 21.2422, "long": 81.4579 } }
+          ],
+          "description": "Celebrate the festival of colors with our grand Holi event! Join us for music, dance, and colorful fun as we welcome spring with joy and enthusiasm."
+        },
+        {
+          "id": 302,
+          "title": "Youth Sports Meet",
+          "type" : EventType.SPORTS,
+          "year_count": 3,
+          "start_date": "2026-04-10",
+          "end_date": "2026-04-15",
+          "locationCords": { "lat": 21.2418, "long": 81.4582 },  // ~150m from group
+          "photos": [
+            "https://picsum.photos/seed/sports/800/500",
+            "https://picsum.photos/seed/sports-2/800/500"
+          ],
+          "programs": [
+            { "id": 302001, 'description' : "The sports meet begins with an inspiring torch rally through the streets, symbolizing the Olympic spirit and the boundless energy of youth.", "title": "Torch Rally", "type": ProgramType.OTHER, "date": "2026-04-10", "from_time": "08:00", "to_time": "09:00", "photos": ["https://picsum.photos/seed/program-302001-1/800/500", "https://picsum.photos/seed/program-302001-2/800/500"], "locationCords": { "lat": 21.2418, "long": 81.4582 } },
+            { "id": 302002, 'description' : "A sacred hawan ceremony to seek blessings for all athletes, praying for their safety and best performance throughout the sports event.", "title": "Opening Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-04-10", "from_time": "09:30", "to_time": "10:15", "photos": ["https://picsum.photos/seed/program-302002-1/800/500", "https://picsum.photos/seed/program-302002-2/800/500"], "locationCords": { "lat": 21.2419, "long": 81.4583 } },
+            { "id": 302003, 'description' : "A specially curated nutritious meal for all athletes to maintain energy and stamina during the mid-tournament phase of the sports meet.", "title": "Athlete Nutrition Prasad", "type": ProgramType.BHANDARA, "date": "2026-04-12", "from_time": "12:30", "to_time": "13:30", "photos": ["https://picsum.photos/seed/program-302003-1/800/500", "https://picsum.photos/seed/program-302003-2/800/500"], "locationCords": { "lat": 21.2417, "long": 81.4581 } },
+            { "id": 302004, 'description' : "Experienced athletes and coaches share insights on sports psychology, career in sports, and valuable life skills with young participants.", "title": "Mentor Talk", "type": ProgramType.CULTURAL, "date": "2026-04-14", "from_time": "17:00", "to_time": "18:00", "photos": ["https://picsum.photos/seed/program-302004-1/800/500", "https://picsum.photos/seed/program-302004-2/800/500"], "locationCords": { "lat": 21.2418, "long": 81.4583 } },
+            { "id": 302005, 'description' : "The sports meet concludes with trophy distribution, felicitation of outstanding performers, and a closing prayer for all participants.", "title": "Closing Ceremony", "type": ProgramType.SPIRITUAL, "date": "2026-04-15", "from_time": "18:00", "to_time": "19:30", "photos": ["https://picsum.photos/seed/program-302005-1/800/500", "https://picsum.photos/seed/program-302005-2/800/500"], "locationCords": { "lat": 21.2419, "long": 81.4582 } }
+          ],
+          "description": "Annual sports meet featuring various competitions including cricket, volleyball, badminton, and athletics for youth from across the city."
+        }
       ]
     },
     {
-      id: 4,
-      group_id: 'PWG_4',
-      name: 'Pragati Welfare Group',
-      location: 'Bilaspur, CG',
-      since: 2019,
-      description: 'Pragati Welfare Group drives social change through street awareness, environmental conservation, and community empowerment initiatives.',
-      contact_numbers: ['9876345678', '9123456783'],
-      admins: [],
-      events: [
-        { id: 401, title: 'Street Play (Nukkad)', year_count: 2, start_date: '2026-01-27', end_date: '2026-02-06', location: 'Main Market', description: 'Experience socially relevant performances right on the streets! Our street plays tackle important social issues through engaging theatrical performances. This unique art form brings awareness and entertainment to the public square.', images: ['https://loremflickr.com/600/400?lock=44', 'https://loremflickr.com/600/400?lock=45', 'https://loremflickr.com/600/400?lock=46'] },
-        { id: 402, title: 'Clean City Campaign', year_count: 5, start_date: '2026-01-25', end_date: '2026-02-08', location: 'City Squares', description: 'Make our city cleaner and greener! Join our 5-year initiative to clean public spaces, remove litter, and promote environmental awareness. Together, we create a healthier and more beautiful city for everyone.', images: ['https://loremflickr.com/600/400?lock=47', 'https://loremflickr.com/600/400?lock=48', 'https://loremflickr.com/600/400?lock=49', 'https://loremflickr.com/600/400?lock=50'] },
-        { id: 403, title: 'Plantation Drive', year_count: 9, start_date: '2026-07-01', end_date: '2026-07-15', location: 'River Bank', description: 'Plant trees and grow the future! Our plantation drive aims to increase green cover and combat climate change. Join us in planting thousands of trees along the river bank and witness your contribution to environmental conservation.', images: ['https://loremflickr.com/600/400?lock=51', 'https://loremflickr.com/600/400?lock=52', 'https://loremflickr.com/600/400?lock=53'] }
+      "id": 4,
+      "groupId": "RSYC_4",
+      "title": "Rising Star Youth Club",
+      "locationCords": { "lat": 21.2510, "long": 81.4620 },  // ~2.8km from user
+      "area": "Jamul",
+      "since": 2021,
+      "description": "Rising Star Youth Club nurtures young talent through sports, education, and personality development programs.",
+      "contactNumbers": ["9876456789", "9123456784"],
+      "logo": "https://picsum.photos/seed/rsyc-logo/200/200",
+      "favourite": false,
+      "admins": [],
+      "events": [
+        {
+          "id": 401,
+          "title": "Dance Competition",
+          "type" : EventType.SPORTS,
+          "year_count": 4,
+          "start_date": "2026-05-15",
+          "end_date": "2026-05-25",
+          "locationCords": { "lat": 21.2512, "long": 81.4618 },  // ~170m from group
+          "photos": [
+            "https://picsum.photos/seed/dance-competition/800/500",
+            "https://picsum.photos/seed/dance-competition-2/800/500"
+          ],
+          "programs": [
+            { "id": 401001, 'description' : "The stage is consecrated with a poojan ceremony, invoking the blessings of Goddess Saraswati for all the aspiring performers taking part.", "title": "Stage Poojan", "type": ProgramType.SPIRITUAL, "date": "2026-05-15", "from_time": "10:00", "to_time": "11:00", "photos": ["https://picsum.photos/seed/program-401001-1/800/500", "https://picsum.photos/seed/program-401001-2/800/500"], "locationCords": { "lat": 21.2512, "long": 81.4618 } },
+            { "id": 401002, 'description' : "Young dancers aged 8-14 showcase their talent in various classical and folk dance forms in this exciting junior category showcase round.", "title": "Junior Category Round", "type": ProgramType.CULTURAL, "date": "2026-05-15", "from_time": "16:00", "to_time": "18:00", "photos": ["https://picsum.photos/seed/program-401002-1/800/500", "https://picsum.photos/seed/program-401002-2/800/500"], "locationCords": { "lat": 21.2513, "long": 81.4619 } },
+            { "id": 401003, 'description' : "A community meal served to all audience members and participants, ensuring everyone feels welcomed, nourished, and celebrated at the event.", "title": "Audience Bhandara", "type": ProgramType.BHANDARA, "date": "2026-05-20", "from_time": "14:00", "to_time": "15:30", "photos": ["https://picsum.photos/seed/program-401003-1/800/500", "https://picsum.photos/seed/program-401003-2/800/500"], "locationCords": { "lat": 21.2511, "long": 81.4617 } },
+            { "id": 401004, 'description' : "The best performers from earlier rounds compete in the spectacular semi-finals, raising the artistic bar and delighting the audience.", "title": "Semi Final Showcase", "type": ProgramType.CULTURAL, "date": "2026-05-23", "from_time": "18:30", "to_time": "20:00", "photos": ["https://picsum.photos/seed/program-401004-1/800/500", "https://picsum.photos/seed/program-401004-2/800/500"], "locationCords": { "lat": 21.2512, "long": 81.4619 } },
+            { "id": 401005, 'description' : "The champions are felicitated with trophies and certificates, followed by a celebratory puja and distribution of prasad to all performers.", "title": "Winner Celebration", "type": ProgramType.SPIRITUAL, "date": "2026-05-25", "from_time": "19:00", "to_time": "21:00", "photos": ["https://picsum.photos/seed/program-401005-1/800/500", "https://picsum.photos/seed/program-401005-2/800/500"], "locationCords": { "lat": 21.2513, "long": 81.4618 } }
+          ],
+          "description": "Showcase your dance talent in our inter-city dance competition featuring various styles from classical to contemporary!"
+        }
       ]
     },
     {
-      id: 5,
-      group_id: 'RSYC_5',
-      name: 'Rising Star Youth Club',
-      location: 'Raigarh, CG',
-      since: 2021,
-      description: 'Rising Star Youth Club nurtures young talent through sports, education, and personality development programs.',
-      contact_numbers: ['9876456789', '9123456784'],
-      admins: [],
-      events: [
-        { id: 501, title: 'Dance Competition', year_count: 4, start_date: '2026-05-15', end_date: '2026-05-25', location: 'Town Hall', description: 'Showcase your dance talent! Our annual dance competition welcomes dancers of all styles and skill levels. Compete for prizes, recognition, and the opportunity to perform on stage. It\'s a celebration of movement, music, and talent!', images: ['https://loremflickr.com/600/400?lock=54', 'https://loremflickr.com/600/400?lock=55', 'https://loremflickr.com/600/400?lock=56', 'https://loremflickr.com/600/400?lock=57'] },
-        { id: 502, title: 'Summer Coaching', year_count: 8, start_date: '2026-01-22', end_date: '2026-02-05', location: 'School Ground', description: 'Empower students for success! Our summer coaching program provides academic support in key subjects. Expert tutors help students strengthen fundamentals and prepare for exams. Make the most of your summer break!', images: ['https://loremflickr.com/600/400?lock=58', 'https://loremflickr.com/600/400?lock=59', 'https://loremflickr.com/600/400?lock=60'] },
-        { id: 503, title: 'Football Tournament', year_count: 6, start_date: '2026-01-24', end_date: '2026-02-07', location: 'Sports Complex', description: 'Goal! Experience the thrill of competitive football! Our tournament brings together talented players for intense matches, thrilling goals, and team spirit. Support your favorite teams and enjoy this exciting sporting extravaganza!', images: ['https://loremflickr.com/600/400?lock=61', 'https://loremflickr.com/600/400?lock=62', 'https://loremflickr.com/600/400?lock=63', 'https://loremflickr.com/600/400?lock=64'] },
-        { id: 504, title: 'Cyber Security Seminar', year_count: 1, start_date: '2026-08-05', end_date: '2026-08-10', location: 'College Auditorium', description: 'Protect yourself in the digital age! Learn about cyber threats, data protection, and online safety from industry experts. This inaugural seminar equips you with essential cybersecurity knowledge for the modern world.', images: ['https://loremflickr.com/600/400?lock=65', 'https://loremflickr.com/600/400?lock=66', 'https://loremflickr.com/600/400?lock=67'] }
+      "id": 5,
+      "groupId": "USM_5",
+      "title": "Unity Seva Mandal",
+      "locationCords": { "lat": 21.2640, "long": 81.4710 },  // ~4.5km from user
+      "area": "Ahiwara",
+      "since": 2012,
+      "description": "Unity Seva Mandal is dedicated to community service, organizing health camps, educational programs, and social welfare activities.",
+      "contactNumbers": ["9876789012", "9123456785"],
+      "logo": "https://picsum.photos/seed/usm-logo/200/200",
+      "favourite": true,
+      "admins": [],
+      "events": [
+        {
+          "id": 501,
+          "title": "Free Health Camp",
+          "type" : EventType.OTHER,
+          "year_count": 11,
+          "start_date": "2026-06-01",
+          "end_date": "2026-06-05",
+          "locationCords": { "lat": 21.2638, "long": 81.4708 },  // ~140m from group
+          "photos": [
+            "https://picsum.photos/seed/health-camp/800/500",
+            "https://picsum.photos/seed/health-camp-2/800/500"
+          ],
+          "programs": [
+            { "id": 501001, 'description' : "The health camp opens with a prayer for good health and wellness, encouraging community members to take proactive charge of their well-being.", "title": "Health Sankalp Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-06-01", "from_time": "08:30", "to_time": "09:00", "photos": ["https://picsum.photos/seed/program-501001-1/800/500", "https://picsum.photos/seed/program-501001-2/800/500"], "locationCords": { "lat": 21.2638, "long": 81.4708 } },
+            { "id": 501002, 'description' : "Expert doctors deliver engaging talks on preventive healthcare, nutrition, and common lifestyle diseases to educate and empower the community.", "title": "Health Talk Session", "type": ProgramType.CULTURAL, "date": "2026-06-01", "from_time": "10:00", "to_time": "11:00", "photos": ["https://picsum.photos/seed/program-501002-1/800/500", "https://picsum.photos/seed/program-501002-2/800/500"], "locationCords": { "lat": 21.2639, "long": 81.4709 } },
+            { "id": 501003, 'description' : "A nutritious meal provided to patients and caregivers attending the health camp, prepared with hygiene and care by community volunteers.", "title": "Patient Meal Bhandara", "type": ProgramType.BHANDARA, "date": "2026-06-03", "from_time": "13:00", "to_time": "14:30", "photos": ["https://picsum.photos/seed/program-501003-1/800/500", "https://picsum.photos/seed/program-501003-2/800/500"], "locationCords": { "lat": 21.2637, "long": 81.4707 } },
+            { "id": 501004, 'description' : "An open forum where residents can ask health-related questions directly to specialists, fostering awareness and preventive healthcare habits.", "title": "Doctor Q&A Camp", "type": ProgramType.CULTURAL, "date": "2026-06-04", "from_time": "16:00", "to_time": "17:00", "photos": ["https://picsum.photos/seed/program-501004-1/800/500", "https://picsum.photos/seed/program-501004-2/800/500"], "locationCords": { "lat": 21.2638, "long": 81.4709 } },
+            { "id": 501005, 'description' : "The camp concludes with a hawan ceremony praying for the health, longevity, and prosperity of all community members and their families.", "title": "Samapan Hawan", "type": ProgramType.SPIRITUAL, "date": "2026-06-05", "from_time": "17:00", "to_time": "18:00", "photos": ["https://picsum.photos/seed/program-501005-1/800/500", "https://picsum.photos/seed/program-501005-2/800/500"], "locationCords": { "lat": 21.2639, "long": 81.4708 } }
+          ],
+          "description": "Free health checkup camp providing medical consultations, blood tests, and health awareness sessions for the community."
+        },
+        {
+          "id": 502,
+          "title": "Educational Workshop",
+          "type" : EventType.OTHER,
+          "year_count": 6,
+          "start_date": "2026-07-10",
+          "end_date": "2026-07-12",
+          "locationCords": { "lat": 21.2642, "long": 81.4712 },  // ~160m from group
+          "photos": [
+            "https://picsum.photos/seed/workshop/800/500",
+            "https://picsum.photos/seed/workshop-2/800/500"
+          ],
+          "programs": [
+            { "id": 502001, 'description' : "The educational workshop is inaugurated with an aarati, seeking blessings of wisdom and learning for all participants and facilitators.", "title": "Workshop Inaugural Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-07-10", "from_time": "09:30", "to_time": "10:00", "photos": ["https://picsum.photos/seed/program-502001-1/800/500", "https://picsum.photos/seed/program-502001-2/800/500"], "locationCords": { "lat": 21.2642, "long": 81.4712 } },
+            { "id": 502002, 'description' : "Hands-on skill development activities covering digital literacy, communication skills, and vocational training for the participating youth.", "title": "Skill Lab Session", "type": ProgramType.CULTURAL, "date": "2026-07-10", "from_time": "11:00", "to_time": "12:30", "photos": ["https://picsum.photos/seed/program-502002-1/800/500", "https://picsum.photos/seed/program-502002-2/800/500"], "locationCords": { "lat": 21.2643, "long": 81.4713 } },
+            { "id": 502006, 'description' : "A warm and hearty meal for all volunteers who have dedicated their time and effort to making this educational workshop a success.", "title": "Volunteer Bhandara", "type": ProgramType.BHANDARA, "date": "2026-07-10", "from_time": "11:00", "to_time": "12:30", "photos": ["https://picsum.photos/seed/program-502006-1/800/500", "https://picsum.photos/seed/program-502006-2/800/500"], "locationCords": { "lat": 21.2641, "long": 81.4711 } },
+            { "id": 502003, 'description' : "Blessed prasad is distributed to all students as a token of encouragement and divine blessings for their continued academic journey.", "title": "Student Prasad Vitran", "type": ProgramType.BHANDARA, "date": "2026-07-11", "from_time": "12:30", "to_time": "13:30", "photos": ["https://picsum.photos/seed/program-502003-1/800/500", "https://picsum.photos/seed/program-502003-2/800/500"], "locationCords": { "lat": 21.2642, "long": 81.4713 } },
+            { "id": 502004, 'description' : "Industry experts and career counselors guide students on education pathways, scholarship opportunities, and smart career planning choices.", "title": "Career Guidance Panel", "type": ProgramType.CULTURAL, "date": "2026-07-11", "from_time": "15:00", "to_time": "16:00", "photos": ["https://picsum.photos/seed/program-502004-1/800/500", "https://picsum.photos/seed/program-502004-2/800/500"], "locationCords": { "lat": 21.2643, "long": 81.4712 } },
+            { "id": 502005, 'description' : "The workshop concludes with a heartfelt closing ceremony honoring students, mentors, and volunteers for their remarkable contributions.", "title": "Closing Visarjan Program", "type": ProgramType.SPIRITUAL, "date": "2026-07-12", "from_time": "17:30", "to_time": "18:30", "photos": ["https://picsum.photos/seed/program-502005-1/800/500", "https://picsum.photos/seed/program-502005-2/800/500"], "locationCords": { "lat": 21.2641, "long": 81.4712 } }
+          ],
+          "description": "Educational workshop for students covering career guidance, personality development, and skill enhancement programs."
+        }
       ]
     },
     {
-      id: 6,
-      group_id: 'MP_6',
-      name: 'Maitri Pariwar',
-      location: 'Korba, CG',
-      since: 1995,
-      description: 'Maitri Pariwar is a trusted community organization with 28+ years of experience in social welfare, charity, and environmental conservation.',
-      contact_numbers: ['9876567890', '9123456785'],
-      admins: [],
-      events: [
-        { id: 601, title: 'Holi Milan', year_count: 20, start_date: '2026-01-05', end_date: '2026-01-15', location: 'Club House', description: 'Celebrate colors and unity! Our 20-year tradition of Holi brings the community together for a joyous festival. Experience colored powder showers, traditional sweets, and genuine bonding. This is the perfect time to forgive, forget, and celebrate relationships!', images: ['https://loremflickr.com/600/400?lock=68', 'https://loremflickr.com/600/400?lock=69', 'https://loremflickr.com/600/400?lock=70', 'https://loremflickr.com/600/400?lock=71'] },
-        { id: 602, title: 'Tree Adoption', year_count: 3, start_date: '2026-01-26', end_date: '2026-02-06', location: 'City Parks', description: 'Become a tree guardian! Adopt a tree and help nurture it for years to come. Your adoption supports environmental conservation and creates green spaces for the community. Track your tree\'s growth and make a lasting impact!', images: ['https://loremflickr.com/600/400?lock=72', 'https://loremflickr.com/600/400?lock=73', 'https://loremflickr.com/600/400?lock=74'] },
-        { id: 603, title: 'Old Age Home Visit', year_count: 7, start_date: '2026-01-28', end_date: '2026-02-07', location: 'Old Age Home', description: 'Bring joy to seniors! Our care visits provide companionship, assistance, and love to elderly residents. Share stories, play games, and spend meaningful time with people who appreciate interaction. Make a difference one visit at a time!', images: ['https://loremflickr.com/600/400?lock=75', 'https://loremflickr.com/600/400?lock=76', 'https://loremflickr.com/600/400?lock=77', 'https://loremflickr.com/600/400?lock=78'] },
-        { id: 604, title: 'Digital Literacy Camp', year_count: 2, start_date: '2026-09-01', end_date: '2026-09-12', location: 'Community Center', description: 'Bridge the digital divide! Learn essential computer and internet skills. Our camp teaches basic computer operations, email, online safety, and digital tools. Perfect for those new to technology and wanting to stay connected.', images: ['https://loremflickr.com/600/400?lock=79', 'https://loremflickr.com/600/400?lock=80', 'https://loremflickr.com/600/400?lock=81'] },
-        { id: 605, title: 'Handicraft Exhibition', year_count: 5, start_date: '2026-10-02', end_date: '2026-10-10', location: 'Exhibition Ground', description: 'Celebrate local artistry! Showcase traditional and contemporary handicrafts from talented artisans. Visitors can view, purchase, and support local craftspeople. A perfect blend of art, culture, and commerce!', images: ['https://loremflickr.com/600/400?lock=82', 'https://loremflickr.com/600/400?lock=83', 'https://loremflickr.com/600/400?lock=84', 'https://loremflickr.com/600/400?lock=85'] },
-        { id: 606, title: 'Food Donation', year_count: 12, start_date: '2026-01-20', end_date: '2026-02-04', location: 'Slum Area', description: 'Feed the hungry! Our 12-year food donation drive ensures no one goes hungry. We collect and distribute nutritious meals to underprivileged families and individuals. Every meal is prepared with care and served with compassion.', images: ['https://loremflickr.com/600/400?lock=86', 'https://loremflickr.com/600/400?lock=87', 'https://loremflickr.com/600/400?lock=88'] }
+      "id": 10,
+      "groupId": "VNC_10",
+      "title": "Very Nearby Club",
+      "locationCords": { "lat": 21.2301, "long": 81.4501 },  // ~120m from user (very close)
+      "area": "Kumhari",
+      "since": 2025,
+      "description": "A community club located very close to you, perfect for quick meetups and local events.",
+      "contactNumbers": ["9000000000"],
+      "logo": "https://picsum.photos/seed/nearby-test/200/200",
+      "favourite": false,
+      "admins": [],
+      "events": [
+        {
+          "id": 1001,
+          "title": "Weekend Meetup",
+          "type" : EventType.OTHER,
+          "year_count": 1,
+          "start_date": "2026-03-12",
+          "end_date": "2026-03-13",
+          "locationCords": { "lat": 21.2301, "long": 81.4501 },  // Same as group location
+          "photos": ["https://picsum.photos/seed/test-event/800/500"],
+          "programs": [
+            { "id": 1001001, 'description' : "The weekend meetup begins with a peaceful morning aarati, connecting neighborhood members through shared spiritual practice and community prayer.", "title": "Morning Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-03-16", "from_time": "07:00", "to_time": "08:00", "photos": ["https://picsum.photos/seed/program-1001001-1/800/500", "https://picsum.photos/seed/program-1001001-2/800/500"], "locationCords": { "lat": 21.2301, "long": 81.4501 } },
+            { "id": 1001002, 'description' : "A day-long open bhandara welcoming all neighborhood residents to enjoy home-cooked meals, exchange ideas, and strengthen community bonds.", "title": "Community Bhandara", "type": ProgramType.BHANDARA, "date": "2026-03-12", "from_time": "00:00", "to_time": "23:59", "photos": ["https://picsum.photos/seed/program-1001002-1/800/500", "https://picsum.photos/seed/program-1001002-2/800/500"], "locationCords": { "lat": 21.2302, "long": 81.4502 } }
+          ],
+          "description": "Casual weekend meetup for community members to connect, share ideas, and plan future activities together."
+        }
       ]
     },
     {
-      id: 7,
-      group_id: 'SKM_7',
-      name: 'Sanskriti Kala Manch',
-      location: 'Jagdalpur, CG',
-      since: 2008,
-      description: 'Sanskriti Kala Manch celebrates tribal and local art, promoting cultural heritage and artistic expression through festivals and exhibitions.',
-      contact_numbers: ['9876678901', '9123456786'],
-      admins: [],
-      events: [
-        { id: 701, title: 'Tribal Art Fest', year_count: 25, start_date: '2026-01-29', end_date: '2026-02-09', location: 'Art Gallery', description: 'Celebrate tribal heritage and artistry! This 25-year celebration showcases magnificent tribal art, traditional crafts, and cultural performances. Discover the rich history and talent of tribal communities through art exhibitions and demonstrations.', images: ['https://loremflickr.com/600/400?lock=89', 'https://loremflickr.com/600/400?lock=90', 'https://loremflickr.com/600/400?lock=91', 'https://loremflickr.com/600/400?lock=92'] },
-        { id: 702, title: 'Photography Contest', year_count: 4, start_date: '2026-08-19', end_date: '2026-08-30', location: 'Online', description: 'Capture moments, win recognition! Photographers of all levels can submit their best work. Categories include nature, culture, portraits, and abstracts. Showcase your creative vision and compete for prizes and publication!', images: ['https://loremflickr.com/600/400?lock=93', 'https://loremflickr.com/600/400?lock=94', 'https://loremflickr.com/600/400?lock=95'] },
-        { id: 703, title: 'Local Music Night', year_count: 6, start_date: '2026-11-14', end_date: '2026-11-20', location: 'Music Hall', description: 'Feel the rhythm of local talent! Our music nights feature local musicians and bands performing diverse genres. From traditional to contemporary, this is a platform for musical expression and community entertainment.', images: ['https://loremflickr.com/600/400?lock=96', 'https://loremflickr.com/600/400?lock=97', 'https://loremflickr.com/600/400?lock=98', 'https://loremflickr.com/600/400?lock=99'] }
+      "id": 11,
+      "groupId": "DSS_11",
+      "title": "Bemetera Seva Sangh",
+      "locationCords": { "lat": 21.6480, "long": 81.4500 },
+      "area": "Bemetara",
+      "since": 2016,
+      "description": "Durg Seva Sangh is a long-running community organization known for devotional gatherings, public service programs, and large-scale annual celebrations that attract members from across the district.",
+      "contactNumbers": ["9876500011", "9123400011"],
+      "logo": "https://picsum.photos/seed/dss-logo/200/200",
+      "favourite": false,
+      "admins": [],
+      "events": [
+        {
+          "id": 1101,
+          "title": "Sharad Mahotsav",
+          "type": EventType.FESTIVAL,
+          "year_count": 14,
+          "start_date": "2026-10-18",
+          "end_date": "2026-10-20",
+          "locationCords": { "lat": 21.6482, "long": 81.4503 },
+          "photos": [
+            "https://picsum.photos/seed/sharad-mahotsav/800/500",
+            "https://picsum.photos/seed/sharad-mahotsav-2/800/500"
+          ],
+          "programs": [
+            { "id": 1101001, "description": "The mahotsav opens with a ceremonial deep prajwalan and evening aarati, bringing together families and elders in a peaceful devotional atmosphere.", "title": "Deep Prajwalan Aarati", "type": ProgramType.SPIRITUAL, "date": "2026-10-18", "from_time": "18:00", "to_time": "19:00", "photos": ["https://picsum.photos/seed/program-1101001-1/800/500", "https://picsum.photos/seed/program-1101001-2/800/500"], "locationCords": { "lat": 21.6482, "long": 81.4503 } },
+            { "id": 1101002, "description": "Local artists perform folk songs, dance, and stage acts celebrating regional culture and community traditions.", "title": "Lok Sanskritik Sandhya", "type": ProgramType.CULTURAL, "date": "2026-10-19", "from_time": "19:30", "to_time": "21:30", "photos": ["https://picsum.photos/seed/program-1101002-1/800/500", "https://picsum.photos/seed/program-1101002-2/800/500"], "locationCords": { "lat": 21.6481, "long": 81.4504 } },
+            { "id": 1101003, "description": "A large community meal is served to attendees and volunteers as a mark of gratitude and collective celebration.", "title": "Samuhik Bhandara", "type": ProgramType.BHANDARA, "date": "2026-10-20", "from_time": "12:00", "to_time": "14:30", "photos": ["https://picsum.photos/seed/program-1101003-1/800/500", "https://picsum.photos/seed/program-1101003-2/800/500"], "locationCords": { "lat": 21.6483, "long": 81.4502 } }
+          ],
+          "description": "Sharad Mahotsav is a three-day celebration featuring devotional programs, cultural performances, and community dining for families across the region."
+        }
       ]
-    },
-    {
-      id: 8,
-      group_id: 'UF_8',
-      name: 'Umeed Foundation',
-      location: 'Ambikapur, CG',
-      since: 2012,
-      description: 'Umeed Foundation works towards educational empowerment and skill development for underprivileged communities.',
-      contact_numbers: ['9876789012', '9123456787'],
-      admins: [],
-      events: [
-        { id: 801, title: 'Scholarship Exam', year_count: 10, start_date: '2026-01-30', end_date: '2026-02-12', location: 'School Exam Hall', description: 'Transform education through scholarships! Our 10-year scholarship program helps deserving students access quality education. Participate in our merit-based exam and earn financial support for your academic journey.', images: ['https://loremflickr.com/600/400?lock=100', 'https://loremflickr.com/600/400?lock=101', 'https://loremflickr.com/600/400?lock=102', 'https://loremflickr.com/600/400?lock=103'] },
-        { id: 802, title: 'Winter Clothes Drive', year_count: 15, start_date: '2026-01-25', end_date: '2026-02-08', location: 'City Square', description: 'Warm hearts in winter! Donate winter clothing and blankets to those in need. Our 15-year drive has helped thousands stay warm during harsh winters. Every contribution directly reaches vulnerable populations.', images: ['https://loremflickr.com/600/400?lock=104', 'https://loremflickr.com/600/400?lock=105', 'https://loremflickr.com/600/400?lock=106'] },
-        { id: 803, title: 'Library Setup', year_count: 2, start_date: '2026-06-01', end_date: '2026-06-15', location: 'Village Library', description: 'Open doors to knowledge! Help us establish and stocked village libraries offering free access to books and learning resources. Be part of spreading education and literacy in underserved communities.', images: ['https://loremflickr.com/600/400?lock=107', 'https://loremflickr.com/600/400?lock=108', 'https://loremflickr.com/600/400?lock=109', 'https://loremflickr.com/600/400?lock=110'] },
-        { id: 804, title: 'Skill Training', year_count: 3, start_date: '2026-09-05', end_date: '2026-09-18', location: 'Training Center', description: 'Build a better future! Our vocational skill training programs teach marketable skills from tailoring to digital marketing. Trainees gain certification and job placement assistance to secure sustainable livelihoods.', images: ['https://loremflickr.com/600/400?lock=111', 'https://loremflickr.com/600/400?lock=112', 'https://loremflickr.com/600/400?lock=113'] }
-      ]
-    },
-    {
-      id: 9,
-      group_id: 'AGS_9',
-      name: 'Adarsh Gram Samiti',
-      location: 'Dhamtari, CG',
-      since: 2016,
-      description: 'Adarsh Gram Samiti focuses on agricultural advancement, environmental conservation, and rural development in village communities.',
-      contact_numbers: ['9876890123', '9123456788'],
-      admins: [],
-      events: [
-        { id: 901, title: 'Agri-Tech Seminar', year_count: 4, start_date: '2026-02-01', end_date: '2026-02-06', location: 'Panchayat Bhawan', description: 'Modernize agriculture! Learn about technological advancements in farming including precision agriculture, organic farming, and sustainable practices. Our seminars bring together farmers and experts to boost productivity and sustainability.', images: ['https://loremflickr.com/600/400?lock=114', 'https://loremflickr.com/600/400?lock=115', 'https://loremflickr.com/600/400?lock=116', 'https://loremflickr.com/600/400?lock=117'] },
-        { id: 902, title: 'Pond Cleaning', year_count: 8, start_date: '2026-01-28', end_date: '2026-02-05', location: 'Village Pond', description: 'Preserve water resources! Join us in cleaning and maintaining village ponds. This community effort ensures clean water availability for agriculture and daily use, while promoting environmental conservation.', images: ['https://loremflickr.com/600/400?lock=118', 'https://loremflickr.com/600/400?lock=119', 'https://loremflickr.com/600/400?lock=120'] },
-        { id: 903, title: 'Village Sports Day', year_count: 12, start_date: '2026-04-14', end_date: '2026-04-24', location: 'School Ground', description: 'Celebrate health through sports! Our annual sports day brings the entire village together for friendly competitions, team events, and celebration of fitness. All ages participate in traditional and modern sports.', images: ['https://loremflickr.com/600/400?lock=121', 'https://loremflickr.com/600/400?lock=122', 'https://loremflickr.com/600/400?lock=123', 'https://loremflickr.com/600/400?lock=124'] },
-        { id: 904, title: 'Sanitation Awareness', year_count: 5, start_date: '2026-01-02', end_date: '2026-01-10', location: 'Village Streets', description: 'Health through cleanliness! Our awareness drive educates communities about importance of sanitation and hygiene. We promote waste management, toilet usage, and cleanliness habits for better health.', images: ['https://loremflickr.com/600/400?lock=125', 'https://loremflickr.com/600/400?lock=126', 'https://loremflickr.com/600/400?lock=127'] },
-        { id: 905, title: 'Cattle Health Camp', year_count: 3, start_date: '2026-05-20', end_date: '2026-05-30', location: 'Veterinary Hospital', description: 'Healthy livestock = Healthy farmers! Free veterinary services for cattle including vaccinations, health checkups, and treatment. Healthy animals ensure better productivity and farmer prosperity.', images: ['https://loremflickr.com/600/400?lock=128', 'https://loremflickr.com/600/400?lock=129', 'https://loremflickr.com/600/400?lock=130', 'https://loremflickr.com/600/400?lock=131'] }
-      ]
-    },
-    {
-      id: 10,
-      group_id: 'NNG_10',
-      name: 'Nav Nirman Group',
-      location: 'Rajnandgaon, CG',
-      since: 2022,
-      description: 'Nav Nirman Group is a youth-focused organization supporting entrepreneurship, career development, and leadership building.',
-      contact_numbers: ['9876901234', '9123456789'],
-      admins: [],
-      events: [
-        { id: 1001, title: 'Entrepreneurship Meet', year_count: 2, start_date: '2026-01-31', end_date: '2026-02-10', location: 'Hotel Grand', description: 'Ignite the entrepreneur within! Meet successful business leaders, investors, and mentors. Learn startup strategies, fundraising tips, and business growth hacks. Perfect for aspiring entrepreneurs and innovators!', images: ['https://loremflickr.com/600/400?lock=132', 'https://loremflickr.com/600/400?lock=133', 'https://loremflickr.com/600/400?lock=134'] },
-        { id: 1002, title: 'Career Counselling', year_count: 4, start_date: '2026-05-01', end_date: '2026-05-08', location: 'School Auditorium', description: 'Shape your professional journey! Professional counselors guide students in career planning and decision-making. Explore various career paths, college options, and skill development opportunities.', images: ['https://loremflickr.com/600/400?lock=135', 'https://loremflickr.com/600/400?lock=136', 'https://loremflickr.com/600/400?lock=137', 'https://loremflickr.com/600/400?lock=138'] },
-        { id: 1003, title: 'Youth Icon Awards', year_count: 1, start_date: '2026-08-12', end_date: '2026-08-20', location: 'Town Hall', description: 'Recognize youth excellence! Our inaugural awards ceremony celebrates outstanding young leaders making positive changes in society. Be inspired by role models and aspire to greatness!', images: ['https://loremflickr.com/600/400?lock=139', 'https://loremflickr.com/600/400?lock=140', 'https://loremflickr.com/600/400?lock=141'] }
-      ]
-    },
-    {
-      id: 11,
-      group_id: 'JKT_11',
-      name: 'Jan Kalyan Trust',
-      location: 'Mahasamund, CG',
-      since: 2000,
-      description: 'Jan Kalyan Trust is a 26-year-old healthcare and social welfare organization dedicated to improving lives through medical camps and community services.',
-      contact_numbers: ['9877012345', '9123456790'],
-      admins: [],
-      events: [
-        { id: 1101, title: 'Eye Surgery Camp', year_count: 22, start_date: '2026-02-01', end_date: '2026-02-15', location: 'District Hospital', description: 'Restore sight, restore hope! Our 22-year free eye surgery camp has restored vision to thousands. Expert ophthalmologists perform cataract and other surgeries. Vision is a right, not a privilege—join us in this noble mission!', images: ['https://loremflickr.com/600/400?lock=142', 'https://loremflickr.com/600/400?lock=143', 'https://loremflickr.com/600/400?lock=144', 'https://loremflickr.com/600/400?lock=145'] },
-        { id: 1102, title: 'Women Empowerment Talk', year_count: 5, start_date: '2026-01-28', end_date: '2026-02-05', location: 'Community Hall', description: 'Empower women, empower society! Inspiring talks on women\'s rights, education, health, and professional development. Successful women leaders share their journeys and motivate the next generation.', images: ['https://loremflickr.com/600/400?lock=146', 'https://loremflickr.com/600/400?lock=147', 'https://loremflickr.com/600/400?lock=148'] },
-        { id: 1103, title: 'Cycle Marathon', year_count: 3, start_date: '2026-06-05', end_date: '2026-06-12', location: 'Main Road', description: 'Pedal for a cause! Our cycle marathon promotes fitness, environmental awareness, and community bonding. Join families and friends for a healthy ride through the city streets.', images: ['https://loremflickr.com/600/400?lock=149', 'https://loremflickr.com/600/400?lock=150', 'https://loremflickr.com/600/400?lock=151', 'https://loremflickr.com/600/400?lock=152'] },
-        { id: 1104, title: 'Legal Aid Workshop', year_count: 2, start_date: '2026-07-15', end_date: '2026-07-22', location: 'Law College', description: 'Know your rights! Free legal workshops educate people about constitutional rights, consumer laws, and justice processes. Empower yourself with legal knowledge and access to justice.', images: ['https://loremflickr.com/600/400?lock=153', 'https://loremflickr.com/600/400?lock=154', 'https://loremflickr.com/600/400?lock=155'] },
-        { id: 1105, title: 'Organic Farming Intro', year_count: 4, start_date: '2026-01-25', end_date: '2026-02-04', location: 'Farm House', description: 'Farm chemical-free! Learn organic farming techniques that boost soil health and eliminate harmful pesticides. Discover how to produce nutritious food while protecting the environment.', images: ['https://loremflickr.com/600/400?lock=156', 'https://loremflickr.com/600/400?lock=157', 'https://loremflickr.com/600/400?lock=158', 'https://loremflickr.com/600/400?lock=159'] },
-        { id: 1106, title: 'Blood Group Testing', year_count: 8, start_date: '2026-01-30', end_date: '2026-02-08', location: 'Red Cross', description: 'Know your blood group, save lives! Free blood group testing camps help people understand their blood type and contribute to blood banks. Essential for emergencies and medical situations.', images: ['https://loremflickr.com/600/400?lock=160', 'https://loremflickr.com/600/400?lock=161', 'https://loremflickr.com/600/400?lock=162'] },
-        { id: 1107, title: 'Evening School Support', year_count: 10, start_date: '2026-01-20', end_date: '2026-02-04', location: 'Local School', description: 'Education for all, even after sunset! Our 10-year evening school program supports working children and adults in completing their education. Quality learning with flexible schedules for everyone.', images: ['https://loremflickr.com/600/400?lock=163', 'https://loremflickr.com/600/400?lock=164', 'https://loremflickr.com/600/400?lock=165', 'https://loremflickr.com/600/400?lock=166'] }
-      ]
-    },
-    {
-      id: 12,
-      group_id: 'NSM_12',
-      name: 'Naya Savera Mandal',
-      location: 'Kanker, CG',
-      since: 2024,
-      description: 'Naya Savera Mandal is a newly established community organization committed to bringing positive change through social initiatives and community development programs.',
-      contact_numbers: ['9876012345', '9123456791'],
-      admins: [],
-      events: []
     }
+    
   ];
 
 module.exports = data;

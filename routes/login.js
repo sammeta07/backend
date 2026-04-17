@@ -26,7 +26,30 @@ async function loginRoutes(fastify, options) {
       return reply.code(401).send({ message: 'Invalid email/mobile or password', status: 401 });
     }
 
-    const token = fastify.jwt.sign({ id: user.id, email: user.email, type: user.type });
+    // Fetch group roles for this user
+    const [groupRoles] = await fastify.mysql.query(
+      'SELECT ugr.role, ugr.group_id, g.group_id AS group_code, g.name AS group_name FROM user_group_roles ugr JOIN `groups` g ON g.id = ugr.group_id WHERE ugr.user_id = ?',
+      [user.id]
+    );
+
+    // Fetch event roles for this user (with group details via events table)
+    let eventRoles = [];
+    try {
+      const [eventRows] = await fastify.mysql.query(
+        `SELECT uer.role, uer.event_id, e.title AS event_title, e.group_id,
+                g.group_id AS group_code, g.name AS group_name
+         FROM user_event_roles uer
+         JOIN events e ON e.id = uer.event_id
+         JOIN \`groups\` g ON g.id = e.group_id
+         WHERE uer.user_id = ?`,
+        [user.id]
+      );
+      eventRoles = eventRows;
+    } catch (_) {
+      // events table may not exist yet
+    }
+
+    const token = fastify.jwt.sign({ id: user.id, email: user.email });
 
     return reply.code(200).send({
       message: 'Login successful',
@@ -36,7 +59,8 @@ async function loginRoutes(fastify, options) {
         email: user.email,
         mobile: user.mobile,
         name: user.name,
-        type: user.type,
+        groupRoles: groupRoles.map(r => ({ groupId: r.group_id, groupCode: r.group_code, groupName: r.group_name, role: r.role })),
+        eventRoles: eventRoles.map(r => ({ eventId: r.event_id, eventTitle: r.event_title, groupId: r.group_id, groupCode: r.group_code, groupName: r.group_name, role: r.role })),
         token
       }
     });
